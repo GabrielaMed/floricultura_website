@@ -51,8 +51,8 @@ function ProductGrid() {
                     className="group relative aspect-square overflow-hidden rounded-lg bg-gray-100"
                   >
                     <img
-                      src={product.images[0]} // Ensure that product.images is an array with valid URLs
-                      alt={product.name || 'Product Image'}
+                      src={product.thumbnail_url || product.images[0]}
+                      alt={product.category || 'Product Image'}
                       className="h-full w-full object-cover transition-transform group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />

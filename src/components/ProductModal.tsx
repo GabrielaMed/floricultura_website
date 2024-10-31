@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, ChevronLeft, ChevronRight, MessageCircle } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, MessageCircle, Instagram } from 'lucide-react';
 import type { Product } from '../types';
 
 interface ProductModalProps {
@@ -17,6 +17,11 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
     window.open(`https://wa.me/5567998006714?text=${message}`, '_blank');
   };
 
+  const handleInstagramClick = () => {
+    console.log(product.permalink)
+    window.open(product.permalink, '_blank');
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70">
       <div className="relative bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-hidden">
@@ -26,11 +31,10 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
         >
           <X className="h-6 w-6" />
         </button>
-
         <div className="grid md:grid-cols-2 h-full">
           <div className="relative aspect-square">
             <img
-              src={product.images[currentImageIndex]}
+              src={product.thumbnail_url || product.images[currentImageIndex]}
               alt=""
               className="w-full h-full object-cover"
             />
@@ -51,18 +55,23 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
               </>
             )}
           </div>
-
           <div className="p-6 flex flex-col">
             <div className="flex-1 overflow-y-auto">
               <p className="text-gray-700 whitespace-pre-wrap">{product.caption}</p>
             </div>
-            
             <button
               onClick={handleWhatsAppClick}
               className="mt-4 w-full flex items-center justify-center gap-2 bg-[#ff66c4] text-white px-4 py-3 rounded-lg hover:bg-[#fb7ac7] transition-colors"
             >
               <MessageCircle className="h-5 w-5" />
               Solicitar informações
+            </button>
+            <button
+              onClick={handleInstagramClick}
+              className="mt-4 w-full flex items-center justify-center gap-2 bg-[#E1306C] text-white px-4 py-3 rounded-lg hover:bg-[#fb7ac7] transition-colors"
+            >
+              <Instagram className="h-5 w-5" />
+              Ver no Instagram
             </button>
           </div>
         </div>

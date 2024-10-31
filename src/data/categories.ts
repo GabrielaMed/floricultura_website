@@ -21,7 +21,7 @@ export const categories: Category[] = [
   },
   {
     id: '4',
-    name: 'Cestas de Café da Manhã',
+    name: 'Cestas Café da Manhã',
     slug: 'cestas',
     description: 'Cestas personalizadas para momentos especiais',
   },
@@ -43,4 +43,22 @@ export const categories: Category[] = [
     slug: 'flores',
     description: 'Variedade de plantas floridas',
   },
+  {
+    id: '8',
+    name: 'Suculentas',
+    slug: 'suculentas',
+    description: 'Suculentas de todos os tamanhos e cores',
+  },
+  {
+    id: '9',
+    name: 'Arranjos',
+    slug: 'arranjos',
+    description: 'Arranjos florais para decoração de ambientes'
+  },
+  {
+    id: '10',
+    name: 'Frutíferas',
+    slug: 'frutíferas',
+    description: 'Plantas frutíferas para cultivo em casa'
+  }
 ];

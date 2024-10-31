@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { MapPin, Instagram, Phone } from 'lucide-react';
 
 export function Footer() {

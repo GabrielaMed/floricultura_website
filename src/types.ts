@@ -4,6 +4,9 @@ export interface Product {
   caption: string;
   category: string;
   timestamp: string;
+  thumbnail_url: string;
+  permalink: string;
+
 }
 
 export interface Category {
@@ -19,4 +22,6 @@ export interface InstagramPost {
   caption: string;
   category: string;
   timestamp: string;
+  thumbnail_url: string;
+  permalink: string;
 }
