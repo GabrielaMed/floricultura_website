@@ -27,7 +27,7 @@ export const categories: Category[] = [
   },
   {
     id: '5',
-    name: 'Plantas Penduradas',
+    name: 'Plantas Pendentes',
     slug: 'penduradas',
     description: 'Plantas ideais para decoração suspensa',
   },
@@ -39,7 +39,7 @@ export const categories: Category[] = [
   },
   {
     id: '7',
-    name: 'Plantas com Flores',
+    name: 'Flores',
     slug: 'flores',
     description: 'Variedade de plantas floridas',
   },
