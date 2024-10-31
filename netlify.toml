@@ -1,10 +1,10 @@
 [build]
-  command = "npm run build"
+  command = "npm run build && npm --prefix server run build" 
   publish = "dist"
   functions = "netlify/functions"
 
 [dev]
-  command = "npm run dev"
+  command = "npm run dev & npm --prefix server run dev" 
   targetPort = 5173
 
 [[redirects]]

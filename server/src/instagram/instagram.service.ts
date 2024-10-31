@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import axios from 'axios';
 
-interface InstagramPost {
+export interface InstagramPost {
   id: string;
   images: string[];
   caption: string;
