@@ -26,15 +26,17 @@ export class InstagramService {
 
     try {
       const response = await axios.get(
-        `https://graph.facebook.com/v17.0/${businessAccountId}/media`,
+        `https://graph.facebook.com/v21.0/${businessAccountId}/media`,
         {
           params: {
-            fields: 'id,caption,media_type,media_url,timestamp',
+            fields: this.configService.get<string>(
+              'PARAM_FIELDS'
+            ),
             access_token: accessToken,
           },
         }
       );
-
+      
       return response.data.data.map((post: any) => ({
         id: post.id,
         images:
@@ -44,6 +46,8 @@ export class InstagramService {
         caption: post.caption || '',
         category: this.determineCategory(post.caption || ''),
         timestamp: post.timestamp,
+        thumbnail_url: post.thumbnail_url,
+        permalink: post.permalink,
       }));
     } catch (error) {
       this.logger.error('Error fetching Instagram posts:', error);
@@ -63,9 +67,12 @@ export class InstagramService {
       samambaias: ['samambaia'],
       orquideas: ['orquídea', 'orquidea'],
       cestas: ['cesta', 'café da manhã'],
-      penduradas: ['pendente', 'pendurada'],
+      penduradas: ['pendente'],
       carnivoras: ['carnívora', 'carnivora'],
       flores: ['flor', 'flores'],
+      suculentas: ['suculenta', 'suculentas'],
+      arranjos: ['arranjo'],
+      frutifera: ['frutífera', 'frutifera'],
     };
 
     for (const [category, keywords] of Object.entries(categoryKeywords)) {
