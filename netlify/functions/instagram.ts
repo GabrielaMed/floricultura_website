@@ -7,6 +7,8 @@ interface InstagramPost {
   caption: string;
   category: string;
   timestamp: string;
+  permalink: string;
+  thumbnail_url: string;
 }
 
 interface IGMedia {
@@ -15,6 +17,7 @@ interface IGMedia {
   media_type: string;
   media_url: string;
   permalink: string;
+  thumbnail_url: string;
   timestamp: string;
   children?: {
     data: Array<{
@@ -28,12 +31,15 @@ interface IGMedia {
 function determineCategory(caption: string): string {
   const categoryKeywords = {
     buques: ['buquê', 'buque', 'bouquet'],
-    samambaias: ['samambaia'],
-    orquideas: ['orquídea', 'orquidea'],
-    cestas: ['cesta', 'café da manhã'],
-    penduradas: ['pendente', 'pendurada'],
-    carnivoras: ['carnívora', 'carnivora'],
-    flores: ['flor', 'flores'],
+      samambaias: ['samambaia'],
+      orquideas: ['orquídea', 'orquidea'],
+      cestas: ['cesta', 'café da manhã'],
+      penduradas: ['pendente'],
+      carnivoras: ['carnívora', 'carnivora'],
+      flores: ['flor', 'flores'],
+      suculentas: ['suculenta', 'suculentas'],
+      arranjos: ['arranjo'],
+      frutifera: ['frutífera', 'frutifera'],
   };
 
   for (const [category, keywords] of Object.entries(categoryKeywords)) {
@@ -48,7 +54,7 @@ function determineCategory(caption: string): string {
 }
 
 async function getInstagramPosts(): Promise<InstagramPost[]> {
-  const { INSTAGRAM_BUSINESS_ACCOUNT_ID, FACEBOOK_ACCESS_TOKEN } = process.env;
+  const { INSTAGRAM_BUSINESS_ACCOUNT_ID, FACEBOOK_ACCESS_TOKEN, PARAM_FIELDS } = process.env;
   
   try {
     const response = await axios.get(
@@ -56,7 +62,7 @@ async function getInstagramPosts(): Promise<InstagramPost[]> {
       {
         params: {
           access_token: FACEBOOK_ACCESS_TOKEN,
-          fields: 'id,caption,media_type,media_url,permalink,timestamp,children{media_url,media_type}',
+          fields: PARAM_FIELDS,
           limit: 100,
         },
       }
