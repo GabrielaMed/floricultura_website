@@ -13,14 +13,16 @@ export function useInstagramPosts(category?: string) {
       const { data } = await api.get<Product[]>(
         `/instagram/posts/${category}`
       );
-      return data.map((post) => ({
-        ...post,
-        id: String(post.id),
-        images: [...post.images],
-        caption: String(post.caption),
-        category: String(post.category),
-        timestamp: String(post.timestamp),
-      }));
+      return data
+        .map(post => ({
+          ...post,
+          id: String(post.id),
+          images: [...post.images],
+          caption: String(post.caption),
+          category: String(post.category),
+          timestamp: String(post.timestamp),
+        }))
+        .filter(post => !category || post.category === category); 
     },
     {
       staleTime: 1000 * 60 * 5,
