@@ -11,7 +11,7 @@ export function useInstagramPosts(category?: string) {
     ['posts', category],
     async () => {
       const { data } = await api.get<Product[]>(
-        `/instagram/posts${category ? `/${category}` : ''}`
+        `/instagram/posts/${category}`
       );
       return data.map((post) => ({
         ...post,

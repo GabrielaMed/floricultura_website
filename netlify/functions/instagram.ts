@@ -31,15 +31,15 @@ interface IGMedia {
 function determineCategory(caption: string): string {
   const categoryKeywords = {
     buques: ['buquê', 'buque', 'bouquet'],
-      samambaias: ['samambaia'],
-      orquideas: ['orquídea', 'orquidea'],
-      cestas: ['cesta', 'café da manhã'],
-      penduradas: ['pendente'],
-      carnivoras: ['carnívora', 'carnivora'],
-      flores: ['flor', 'flores'],
-      suculentas: ['suculenta', 'suculentas'],
-      arranjos: ['arranjo'],
-      frutifera: ['frutífera', 'frutifera'],
+    samambaias: ['samambaia'],
+    orquideas: ['orquídea', 'orquidea'],
+    cestas: ['cesta', 'café da manhã'],
+    penduradas: ['pendente'],
+    carnivoras: ['carnívora', 'carnivora'],
+    flores: ['flor', 'flores'],
+    suculentas: ['suculenta', 'suculentas'],
+    arranjos: ['arranjo'],
+    frutifera: ['frutífera', 'frutifera'],
   };
 
   for (const [category, keywords] of Object.entries(categoryKeywords)) {
@@ -77,8 +77,8 @@ async function getInstagramPosts(): Promise<InstagramPost[]> {
       caption: post.caption || '',
       category: determineCategory(post.caption || ''),
       timestamp: post.timestamp,
-        thumbnail_url: post.thumbnail_url,
-        permalink: post.permalink,
+      thumbnail_url: post.thumbnail_url,
+      permalink: post.permalink,
     }));
 
     return posts;
@@ -90,12 +90,12 @@ async function getInstagramPosts(): Promise<InstagramPost[]> {
 
 export const handler: Handler = async (event) => {
   try {
-    const posts = await getInstagramPosts();
+    const data = await getInstagramPosts();
+    const { category } = event.queryStringParameters || {};
     
-    const category = event.queryStringParameters?.category;
-    const filteredPosts = category
-      ? posts.filter(post => post.category === category)
-      : posts;
+    const filteredPosts = data.filter((post: InstagramPost) => 
+      category ? post.category === category : true
+    );
 
     return {
       statusCode: 200,
