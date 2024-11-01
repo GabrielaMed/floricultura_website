@@ -58,7 +58,7 @@ async function getInstagramPosts(): Promise<InstagramPost[]> {
   
   try {
     const response = await axios.get(
-      `https://graph.facebook.com/v19.0/${INSTAGRAM_BUSINESS_ACCOUNT_ID}/media`,
+      `https://graph.facebook.com/v21.0/${INSTAGRAM_BUSINESS_ACCOUNT_ID}/media`,
       {
         params: {
           access_token: FACEBOOK_ACCESS_TOKEN,
