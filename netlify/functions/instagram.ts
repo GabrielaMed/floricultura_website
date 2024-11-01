@@ -70,14 +70,15 @@ async function getInstagramPosts(): Promise<InstagramPost[]> {
 
     const posts: InstagramPost[] = response.data.data.map((post: IGMedia) => ({
       id: post.id,
-      images: post.children?.data 
-        ? post.children.data
-            .filter(child => child.media_type === 'IMAGE')
-            .map(child => child.media_url)
-        : [post.media_url],
+      images:
+        post.media_type === 'CAROUSEL_ALBUM'
+          ? [post.media_url]
+          : [post.media_url],
       caption: post.caption || '',
       category: determineCategory(post.caption || ''),
       timestamp: post.timestamp,
+        thumbnail_url: post.thumbnail_url,
+        permalink: post.permalink,
     }));
 
     return posts;
@@ -91,7 +92,6 @@ export const handler: Handler = async (event) => {
   try {
     const posts = await getInstagramPosts();
     
-    // Filter by category if specified
     const category = event.queryStringParameters?.category;
     const filteredPosts = category
       ? posts.filter(post => post.category === category)
