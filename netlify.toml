@@ -1,18 +1,31 @@
 [build]
-  command = "npm run build && npm --prefix server run build" 
+  command = "npm run install:all && npm run build"
   publish = "dist"
   functions = "netlify/functions"
 
+[build.environment]
+  NODE_VERSION = "20"
+  NPM_FLAGS = "--no-audit --no-fund"
+
 [dev]
-  command = "npm run dev & npm --prefix server run dev" 
+  command = "npm run dev"
   targetPort = 5173
+  port = 8888
+  framework = "#custom"
+  autoLaunch = true
 
 [[redirects]]
-  from = "/.netlify/functions/*"
+  from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+  force = true
+
+[functions]
+  node_bundler = "esbuild"
+  external_node_modules = ["better-sqlite3"]

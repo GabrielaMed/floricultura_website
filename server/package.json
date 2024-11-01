@@ -17,9 +17,11 @@
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/schedule": "^4.0.1",
     "cache-manager": "^5.4.0",
+    "floricultura-jardim-maravilhas": "file:..",
     "instagram-private-api": "^1.45.3",
     "reflect-metadata": "^0.2.0",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "vite-react-typescript-starter": "file:.."
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
