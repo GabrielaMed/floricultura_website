@@ -9,22 +9,22 @@
 
 [dev]
   command = "npm run dev"
-  targetPort = 4173
+  targetPort = 3000
   port = 8888
   framework = "#custom"
   autoLaunch = true
+  
+[[redirects]]
+from = "/api/*"
+to = "/.netlify/functions/:splat"
+status = 200
+force = true
 
 [[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-  force = true
+from = "/*"
+to = "/index.html"
+status = 200
+force = true
 
 [functions]
   node_bundler = "esbuild"
