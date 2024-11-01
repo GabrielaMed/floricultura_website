@@ -18,7 +18,6 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
   };
 
   const handleInstagramClick = () => {
-    console.log(product.permalink)
     window.open(product.permalink, '_blank');
   };
 
@@ -57,7 +56,9 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
           </div>
           <div className="p-6 flex flex-col">
             <div className="flex-1 overflow-y-auto">
-              <p className="text-gray-700 whitespace-pre-wrap">{product.caption}</p>
+              <p className="text-gray-700 whitespace-pre-wrap">
+                {product.caption.length > 130 ? `${product.caption.slice(0, 100)}...` : product.caption}
+              </p>
             </div>
             <button
               onClick={handleWhatsAppClick}
